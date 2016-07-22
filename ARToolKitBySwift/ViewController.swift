@@ -4,7 +4,7 @@
 //
 //  Created by 藤澤研究室 on 2016/07/11.
 //  Copyright © 2016年 藤澤研究室. All rights reserved.
-//
+// sa2tala
 
 import UIKit
 import QuartzCore
