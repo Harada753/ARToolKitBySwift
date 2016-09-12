@@ -130,17 +130,17 @@ class ViewController: UIViewController, CameraVideoTookPictureDelegate, EAGLView
                 [glView setCameraPose:NULL];
             }
 
-// Get current time (units = seconds).
-NSTimeInterval runLoopTimeNow;
-runLoopTimeNow = CFAbsoluteTimeGetCurrent();
-[glView updateWithTimeDelta:(runLoopTimeNow - runLoopTimePrevious)];
+            // Get current time (units = seconds).
+            var runLoopTimeNow: NSTimeInterval
+            runLoopTimeNow = CFAbsoluteTimeGetCurrent();
+            [glView updateWithTimeDelta:(runLoopTimeNow - runLoopTimePrevious)];
 
-// The display has changed.
-[glView drawView:self];
+            // The display has changed.
+            [glView drawView:self];
 
-// Save timestamp for next loop.
-runLoopTimePrevious = runLoopTimeNow;
-}
+            // Save timestamp for next loop.
+            runLoopTimePrevious = runLoopTimeNow;
+        }
     }
 
     func takeSnapshot() {
