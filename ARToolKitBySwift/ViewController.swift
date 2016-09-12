@@ -44,7 +44,7 @@ class ViewController: UIViewController, CameraVideoTookPictureDelegate, EAGLView
                 irisImage = "Iris.png"
             }
         }
-        let irisView = UIImageView.alloc().initWithImage(UIImage(imageNamed:irisImage).autorelease)
+        let irisView = UIImageView.alloc(initWithImage(UIImage.imageNamed(irisImage).autorelease))
         irisView.userInteractionEnabled = YES // タッチの検知を行う
         self.view = irisView
     }
@@ -126,7 +126,7 @@ class ViewController: UIViewController, CameraVideoTookPictureDelegate, EAGLView
         
         if arglContextSettings == true {
             arglCleanup(arglContextSettings)
-            arglContextSettings = NULL;
+            arglContextSettings = NULL
         }
         glView.removeFromSuperview()
         glView = nil
@@ -178,7 +178,7 @@ class ViewController: UIViewController, CameraVideoTookPictureDelegate, EAGLView
             // Check through the marker_info array for highest confidence
             // visible marker matching our preferred pattern.
             k = -1
-            for (j = 0; j < gARHandle.marker_num; j++) {
+            for (j = 0;j < gARHandle.marker_num;j++) {
                 if (gARHandle.markerInfo[j].id == gPatt_id) {
                     if (k == -1)
                     {
@@ -213,7 +213,7 @@ class ViewController: UIViewController, CameraVideoTookPictureDelegate, EAGLView
             // Get current time (units = seconds).
             var runLoopTimeNow: NSTimeInterval
             runLoopTimeNow = CFAbsoluteTimeGetCurrent()
-            glView(updateWithTimeDelta:(runLoopTimeNow - runLoopTimePrevious))
+            glView(updateWithTimeDelta(runLoopTimeNow - runLoopTimePrevious))
             
             // The display has changed.
             glView(drawView(self))
@@ -277,7 +277,7 @@ class ViewController: UIViewController, CameraVideoTookPictureDelegate, EAGLView
         // Tell arVideo what the typical focal distance will be. Note that this does NOT
         // change the actual focus, but on devices with non-fixed focus, it lets arVideo
         // choose a better set of camera parameters.
-        ar2VideoSetParami(gVid, AR_VIDEO_PARAM_IOS_FOCUS, AR_VIDEO_IOS_FOCUS_0_3M); // Default is 0.3 metres. See <AR/sys/videoiPhone.h> for allowable values.
+        ar2VideoSetParami(gVid, AR_VIDEO_PARAM_IOS_FOCUS, AR_VIDEO_IOS_FOCUS_0_3M) // Default is 0.3 metres. See <AR/sys/videoiPhone.h> for allowable values.
         
         // Load the camera parameters, resize for the window and init.
         var cparam: ARParam? = ARParam()
@@ -331,9 +331,9 @@ class ViewController: UIViewController, CameraVideoTookPictureDelegate, EAGLView
         cameraVideo(setTookPictureDelegateUserData:nil)
         
         // Other ARToolKit setup.
-        arSetMarkerExtractionMode(gARHandle, AR_USE_TRACKING_HISTORY_V2);
-        //arSetMarkerExtractionMode(gARHandle, AR_NOUSE_TRACKING_HISTORY);
-        //arSetLabelingThreshMode(gARHandle, AR_LABELING_THRESH_MODE_MANUAL); // Uncomment to use  manual thresholding.
+        arSetMarkerExtractionMode(gARHandle, AR_USE_TRACKING_HISTORY_V2)
+        //arSetMarkerExtractionMode(gARHandle, AR_NOUSE_TRACKING_HISTORY)
+        //arSetLabelingThreshMode(gARHandle, AR_LABELING_THRESH_MODE_MANUAL) // Uncomment to use  manual thresholding.
         
         // Allocate the OpenGL view.
         glView = ARView.alloc().initWithFrame(UIScreen.mainScreen().bounds (pixelFormat:kEAGLColorFormatRGBA8, depthFormat:kEAGLDepth16, withStencil:NO, preserveBackbuffer:NO).autorelease) // Don't retain it, as it will be retained when added to self.view.
@@ -343,33 +343,33 @@ class ViewController: UIViewController, CameraVideoTookPictureDelegate, EAGLView
         // Create the OpenGL projection from the calibrated camera parameters.
         // If flipV is set, flip.
         var frustum: [GLfloat]
-        arglCameraFrustumRHf(&gCparamLT.param, VIEW_DISTANCE_MIN, VIEW_DISTANCE_MAX, frustum);
+        arglCameraFrustumRHf(&gCparamLT.param, VIEW_DISTANCE_MIN, VIEW_DISTANCE_MAX, frustum)
         glView(setCameraLens:frustum)
         glView.contentFlipV = flipV
         
         // Set up content positioning.
-        glView.contentScaleMode = ARViewContentScaleModeFill;
-        glView.contentAlignMode = ARViewContentAlignModeCenter;
-        glView.contentWidth = gARHandle.xsize;
-        glView.contentHeight = gARHandle.ysize;
-        var isBackingTallerThanWide: Bool = (glView.surfaceSize.height > glView.surfaceSize.width);
+        glView.contentScaleMode = ARViewContentScaleModeFill
+        glView.contentAlignMode = ARViewContentAlignModeCenter
+        glView.contentWidth = gARHandle.xsize
+        glView.contentHeight = gARHandle.ysize
+        var isBackingTallerThanWide: Bool = (glView.surfaceSize.height > glView.surfaceSize.width)
         if (glView.contentWidth > glView.contentHeight) {
-            glView.contentRotate90 = isBackingTallerThanWide;
+            glView.contentRotate90 = isBackingTallerThanWide
         }
         else {
-            glView.contentRotate90 = !isBackingTallerThanWide;
+            glView.contentRotate90 = !isBackingTallerThanWide
         }
         
         // Setup ARGL to draw the background video.
-        arglContextSettings = arglSetupForCurrentContext(&gCparamLT.param, pixFormat);
+        arglContextSettings = arglSetupForCurrentContext(&gCparamLT.param, pixFormat)
         
-        arglSetRotate90(arglContextSettings, (glView.contentWidth > glView.contentHeight ? isBackingTallerThanWide : !isBackingTallerThanWide));
+        arglSetRotate90(arglContextSettings, (glView.contentWidth > glView.contentHeight ? isBackingTallerThanWide : !isBackingTallerThanWide))
         if (flipV) {
-            arglSetFlipV(arglContextSettings, true);
+            arglSetFlipV(arglContextSettings, true)
         }
         var width, height: Int?
-        ar2VideoGetBufferSize(gVid, &width, &height);
-        arglPixelBufferSizeSet(arglContextSettings, width, height);
+        ar2VideoGetBufferSize(gVid, &width, &height)
+        arglPixelBufferSizeSet(arglContextSettings, width, height)
         
         // Prepare ARToolKit to load patterns.
         if (!(gARPattHandle = arPattCreateHandle())) {
@@ -377,22 +377,22 @@ class ViewController: UIViewController, CameraVideoTookPictureDelegate, EAGLView
             self.stop()
             return
         }
-        arPattAttach(gARHandle, gARPattHandle);
+        arPattAttach(gARHandle, gARPattHandle)
         
         // Load marker(s).
         // Loading only 1 pattern in this example.
-        var patt_name: String?  = "Data2/hiro.patt";
+        var patt_name: String?  = "Data2/hiro.patt"
         if ((gPatt_id = arPattLoad(gARPattHandle, patt_name)) < 0) {
-            NSLog("Error loading pattern file %s.\n", patt_name);
+            NSLog("Error loading pattern file %s.\n", patt_name)
             self.stop()
             return
         }
-        gPatt_width = 40.0;
-        gPatt_found = false;
+        gPatt_width = 40.0
+        gPatt_found = false
         
         // For FPS statistics.
-        arUtilTimerReset();
-        gCallCountMarkerDetect = 0;
+        arUtilTimerReset()
+        gCallCountMarkerDetect = 0
         
         //Create our runloop timer
         self.setRunLoopInterval(2) // Target 30 fps on a 60 fps device.
@@ -424,7 +424,7 @@ class ViewController: UIViewController, CameraVideoTookPictureDelegate, EAGLView
     }
 
     func setMarkersHaveWhiteBorders(markersHaveWhiteBorders:Bool) {
-        arSetLabelingMode(gARHandle, (markersHaveWhiteBorders ? AR_LABELING_WHITE_REGION : AR_LABELING_BLACK_REGION));
+        arSetLabelingMode(gARHandle, (markersHaveWhiteBorders ? AR_LABELING_WHITE_REGION : AR_LABELING_BLACK_REGION))
     }
     
     // Call this method to take a snapshot of the ARView.
@@ -442,7 +442,7 @@ class ViewController: UIViewController, CameraVideoTookPictureDelegate, EAGLView
         glView.setTookSnapshotDelegate(nil)
     
         // Write image to camera roll.
-        UIImageWriteToSavedPhotosAlbum(snapshot, self, selector(image:didFinishSavingWithError:contextInfo:), nil);
+        UIImageWriteToSavedPhotosAlbum(snapshot, self, selector(image:didFinishSavingWithError:contextInfo:), nil)
     }
     
     // Let the user know that the image was saved by playing a shutter sound,
@@ -450,14 +450,14 @@ class ViewController: UIViewController, CameraVideoTookPictureDelegate, EAGLView
     func image(image:UnsafeMutablePointer<UIImage>, didFinishSavingWithError error:UnsafeMutablePointer<NSError>, contextInfo: UnsafeMutablePointer<void>) {
         if (!error) {
             var shutterSound: SystemSoundID
-            AudioServicesCreateSystemSoundID(NSBundle.mainBundle().URLForResource("slr_camera_shutter").withExtension("wav") as CFURLRef, &shutterSound);
-            AudioServicesPlaySystemSound(shutterSound);
+            AudioServicesCreateSystemSoundID(NSBundle.mainBundle().URLForResource("slr_camera_shutter").withExtension("wav") as CFURLRef, &shutterSound)
+            AudioServicesPlaySystemSound(shutterSound)
         } else {
             var titleString: String? = "Error saving screenshot"
             var messageString: Stirng? = error.localizedDescription()
-            var moreString: String? = error.localizedFailureReason() ? error.localizedFailureReason() : NSLocalizedString("Please try again.", nil);
+            var moreString: String? = error.localizedFailureReason() ? error.localizedFailureReason() : NSLocalizedString("Please try again.", nil)
             messageString = NSString.stringWithFormat("%@. %@", messageString, moreString)
-            var alertView: UIAlertView? = UIAlertView.alloc(initWithTitle(titleString), message(messageString), delegate(self), cancelButtonTitle("OK"), otherButtonTitles(nil));
+            var alertView: UIAlertView? = UIAlertView.alloc(initWithTitle(titleString), message(messageString), delegate(self), cancelButtonTitle("OK"), otherButtonTitles(nil))
             alertView.show()
             alertView.release()
         }
