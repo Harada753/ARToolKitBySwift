@@ -152,7 +152,7 @@
 				TargetAttributes = {
 					90F56B001D3332630081C9BA = {
 						CreatedOnToolsVersion = 7.3.1;
-						DevelopmentTeam = UP3HNHRKU7;
+						DevelopmentTeam = GJ48EG8R4K;
 					};
 					90F56B141D3332630081C9BA = {
 						CreatedOnToolsVersion = 7.3.1;
@@ -344,7 +344,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = ARToolKitBySwift/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = haradatoshiki.ARToolKitBySwift;
+				PRODUCT_BUNDLE_IDENTIFIER = com.haradatoshiki.ARToolKitBySwift;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "ARToolKitBySwift/ARToolKitBySwift-Bridging-Header.h";
@@ -361,7 +361,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = ARToolKitBySwift/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = haradatoshiki.ARToolKitBySwift;
+				PRODUCT_BUNDLE_IDENTIFIER = com.haradatoshiki.ARToolKitBySwift;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "ARToolKitBySwift/ARToolKitBySwift-Bridging-Header.h";
